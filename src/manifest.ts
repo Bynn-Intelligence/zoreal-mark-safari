@@ -22,7 +22,8 @@ export default defineManifest((env) => ({
   // One version, in package.json: `npm version` moves it and the release
   // workflow tags it.
   version: pkg.version,
-  description: 'Verify that a real human, verified by ZOREAL, vouched for what you are reading. Sign what you post. Works on any site.',
+  // Safari allows 112 characters here.
+  description: 'See which posts a real human, verified by ZOREAL, vouched for, and sign what you post. Works on any site.',
   icons: { 16: 'icons/icon-16.png', 32: 'icons/icon-32.png', 48: 'icons/icon-48.png', 128: 'icons/icon-128.png' },
   action: {
     default_popup: 'src/popup/index.html',
