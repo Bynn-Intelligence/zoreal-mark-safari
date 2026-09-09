@@ -1,0 +1,312 @@
+{
+  "$comment": "Where the post and comment boxes are, per site, so the sign control can sit beside them. This list places the control and nothing else: nothing in verification, canonicalisation, URL handling or the site derivation reads it, and a site with no entry still signs from the toolbar popup or the context menu. `site` is the registrable domain (mail.google.com is google.com), `selectors` are CSS selectors of the editable boxes, in the light DOM (a box inside a closed shadow root cannot be reached), and `binding` is `page` unless the site is a chat service with a stable URL per channel. Selectors rot whenever a site redesigns, so this list is maintained by everyone: add or fix an entry with a pull request, and say in it which page you checked and when. Entries are wanted for every site people write on, in every country; the README lists the ones we know we are missing.",
+  "sites": [
+    {
+      "site": "x.com",
+      "name": "X",
+      "selectors": [
+        "div[data-testid='tweetTextarea_0']",
+        "div[data-testid^='tweetTextarea_']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "twitter.com",
+      "name": "X",
+      "selectors": [
+        "div[data-testid='tweetTextarea_0']",
+        "div[data-testid^='tweetTextarea_']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "youtube.com",
+      "name": "YouTube",
+      "selectors": [
+        "#contenteditable-root",
+        "ytd-commentbox #contenteditable-root"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "reddit.com",
+      "name": "Reddit",
+      "selectors": [
+        "shreddit-composer [contenteditable='true']",
+        "div[contenteditable='true'][role='textbox']",
+        "textarea[name='text']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "linkedin.com",
+      "name": "LinkedIn",
+      "selectors": [
+        "div.ql-editor[contenteditable='true']",
+        "div.comments-comment-box__form div[contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "facebook.com",
+      "name": "Facebook",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "instagram.com",
+      "name": "Instagram",
+      "selectors": [
+        "textarea[aria-label='Add a comment…']",
+        "textarea[aria-label='Add a comment...']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "threads.net",
+      "name": "Threads",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "github.com",
+      "name": "GitHub",
+      "selectors": [
+        "textarea#new_comment_field",
+        "textarea[name='comment[body]']",
+        "textarea[name='issue[body]']",
+        "textarea[name='pull_request[body]']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "news.ycombinator.com",
+      "name": "Hacker News",
+      "selectors": [
+        "textarea[name='text']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "mastodon.social",
+      "name": "Mastodon",
+      "selectors": [
+        "textarea.autosuggest-textarea__textarea"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "bsky.app",
+      "name": "Bluesky",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "slack.com",
+      "name": "Slack",
+      "selectors": [
+        "div.ql-editor[contenteditable='true']"
+      ],
+      "binding": "channel"
+    },
+    {
+      "site": "discord.com",
+      "name": "Discord",
+      "selectors": [
+        "div[role='textbox'][contenteditable='true']"
+      ],
+      "binding": "channel"
+    },
+    {
+      "site": "localhost",
+      "name": "The development demo",
+      "selectors": [
+        "textarea#demo-box"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "threads.com",
+      "name": "Threads",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "tiktok.com",
+      "name": "TikTok",
+      "selectors": [
+        "[data-e2e='comment-input'] [contenteditable='true']",
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "google.com",
+      "name": "Gmail and Google Chat",
+      "selectors": [
+        "div[aria-label='Message Body'][contenteditable='true']",
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "live.com",
+      "name": "Outlook on the web",
+      "selectors": [
+        "div[aria-label='Message body'][contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "outlook.com",
+      "name": "Outlook on the web",
+      "selectors": [
+        "div[aria-label='Message body'][contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "office.com",
+      "name": "Outlook on the web",
+      "selectors": [
+        "div[aria-label='Message body'][contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "whatsapp.com",
+      "name": "WhatsApp Web",
+      "selectors": [
+        "footer div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "channel"
+    },
+    {
+      "site": "telegram.org",
+      "name": "Telegram Web",
+      "selectors": [
+        ".input-message-input[contenteditable='true']",
+        "#editable-message-text"
+      ],
+      "binding": "channel"
+    },
+    {
+      "site": "twitch.tv",
+      "name": "Twitch chat",
+      "selectors": [
+        "div[data-a-target='chat-input']"
+      ],
+      "binding": "channel"
+    },
+    {
+      "site": "stackoverflow.com",
+      "name": "Stack Overflow",
+      "selectors": [
+        "textarea#wmd-input",
+        "textarea.js-comment-text-input",
+        "textarea[id^='wmd-input']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "stackexchange.com",
+      "name": "Stack Exchange",
+      "selectors": [
+        "textarea#wmd-input",
+        "textarea.js-comment-text-input",
+        "textarea[id^='wmd-input']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "wikipedia.org",
+      "name": "Wikipedia",
+      "selectors": [
+        "textarea#wpTextbox1",
+        ".ve-ce-documentNode[contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "gitlab.com",
+      "name": "GitLab",
+      "selectors": [
+        "textarea#note-body",
+        "textarea.js-gfm-input",
+        "textarea#issue_description",
+        "textarea#merge_request_description"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "vk.com",
+      "name": "VK",
+      "selectors": [
+        "div.reply_field[contenteditable='true']",
+        "#post_field",
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "5ch.net",
+      "name": "5channel",
+      "selectors": [
+        "textarea[name='MESSAGE']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "quora.com",
+      "name": "Quora",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']",
+        "div[contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "medium.com",
+      "name": "Medium",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']",
+        "div[contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "substack.com",
+      "name": "Substack",
+      "selectors": [
+        "textarea",
+        "div[contenteditable='true']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "pinterest.com",
+      "name": "Pinterest",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']"
+      ],
+      "binding": "page"
+    },
+    {
+      "site": "nextdoor.com",
+      "name": "Nextdoor",
+      "selectors": [
+        "div[contenteditable='true'][role='textbox']",
+        "textarea"
+      ],
+      "binding": "page"
+    }
+  ]
+}

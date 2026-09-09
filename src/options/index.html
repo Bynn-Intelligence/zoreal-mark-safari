@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZOREAL Mark settings</title>
+  <link rel="stylesheet" href="../ui/tokens.css" />
+  <style>
+    main { max-width: 560px; margin: 0 auto; padding: 40px 20px 60px; display: flex; flex-direction: column; gap: 24px; }
+    h1 { font-size: 22px; margin: 0; }
+    p { color: var(--ink-secondary); margin: 0; }
+    section { display: flex; flex-direction: column; gap: 10px; }
+    label.toggle { display: flex; gap: 12px; align-items: flex-start; }
+    label.toggle input { margin-top: 4px; accent-color: var(--brand-deep); }
+    .note { color: var(--ink-muted); font-size: 13px; }
+    .row { display: flex; gap: 8px; }
+    .pin { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink-secondary); word-break: break-all; white-space: pre-line; }
+    .ok { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <header style="display:flex;align-items:center;gap:10px"><img src="/icons/icon-32.png" width="28" height="28" alt="" /><h1 class="display">ZOREAL Mark</h1></header>
+    <section>
+      <h2 class="mrz">Record service</h2>
+      <p>Where records are fetched from. Records are public; they are fetched without credentials and cached.</p>
+      <div class="field"><input id="recordBase" type="url" spellcheck="false" /></div>
+      <div class="note">Default <code>https://mark.zoreal.com</code>: a record is that address plus its id, the same page a person opens. A local setup uses <code>http://localhost:&lt;port&gt;/mark</code>.</div>
+      <h2 class="mrz" style="margin-top:14px">API</h2>
+      <p>Where sign orders are created and polled.</p>
+      <div class="field"><input id="baseUrl" type="url" spellcheck="false" /></div>
+      <div class="note">Default <code>https://api.zoreal.com</code>. A <code>localhost</code> origin is a development server and the only case in which trust anchors are read from the service.</div>
+      <div class="field"><input id="apiPrefix" type="text" spellcheck="false" placeholder="/v1" /></div>
+      <div class="note">Where the API is mounted on that origin: <code>/v1</code> in production, <code>/api/v1</code> on a local Rails.</div>
+    </section>
+    <section>
+      <h2 class="mrz">Sighting reports</h2>
+      <label class="toggle"><input id="sightings" type="checkbox" /><span>Tell the record service when a Mark is found verified for another page.<br/><span class="note">Sends the record id and the URL where the copy was seen, with no credential, no cookie and nothing about you. Off by default. A signer who asked to be alerted when their words are moved is alerted; otherwise it is discarded.</span></span></label>
+    </section>
+    <section>
+      <h2 class="mrz">Trust anchors</h2>
+      <p>Compiled into the extension and never fetched. Compare with the values on the ZOREAL ID app's about screen.</p>
+      <div class="pin" id="pins"></div>
+    </section>
+    <div class="row"><button class="primary" id="save">Save</button><button id="clear">Clear the record cache</button><span id="status" class="note" style="align-self:center"></span></div>
+  </main>
+  <script type="module" src="./options.ts"></script>
+</body>
+</html>

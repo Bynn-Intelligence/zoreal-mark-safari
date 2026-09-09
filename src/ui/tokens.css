@@ -1,0 +1,117 @@
+/*
+ * The ZOREAL design tokens, the product palette. Air is the primary material,
+ * one accent (cyan) used sparingly, hairlines not boxes, every corner from the
+ * radius lock, every interactive control a pill. Space Grotesk, self-hosted.
+ */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+}
+
+:root {
+  --substrate: #FFFFFF;
+  --surface: #F6F9FC;
+  --hairline: #E6EBF1;
+  --hairline-strong: #C9D3DF;
+  --ink: #0E104F;
+  --ink-secondary: #425466;
+  --ink-muted: #697386;
+  --brand: #00b4d9;
+  --on-brand: #0E104F;
+  --brand-deep: #00758D;
+  --brand-tint: #EAF8FD;
+  --accent: #00758D;
+  --danger: #D93036;
+  --danger-tint: #FBECEC;
+  --warn-tint: #FFF6E5;
+  --warn-deep: #8A5A00;
+  --scrim: rgb(0 0 0 / 0.5);
+  --r-card: 20px;
+  --r-panel: 32px;
+  --r-inset: 14px;
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ease-enter: cubic-bezier(0.23, 1, 0.32, 1);
+  --shadow-rgb: 14 16 79;
+  --lift: 0 1px 2px rgb(var(--shadow-rgb) / 0.06), 0 8px 24px rgb(var(--shadow-rgb) / 0.10);
+  --lift-lg: 0 2px 4px rgb(var(--shadow-rgb) / 0.06), 0 20px 48px rgb(var(--shadow-rgb) / 0.16);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --substrate: #12162C;
+    --surface: #0B0E20;
+    --hairline: #262B4A;
+    --hairline-strong: #3A4166;
+    --ink: #F5F7FF;
+    --ink-secondary: #B9C0DC;
+    --ink-muted: #8A92B4;
+    --brand-deep: #5FD8F5;
+    --brand-tint: #0E2A3F;
+    --accent: #5FD8F5;
+    --danger-tint: #3A1518;
+    --warn-tint: #3A2A0E;
+    --warn-deep: #F2C46D;
+    --shadow-rgb: 0 0 0;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--substrate);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.display { font-weight: 600; letter-spacing: -0.03em; }
+.mrz { font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+
+button, .btn {
+  font: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  min-height: 40px;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: background 200ms var(--ease-enter), border-color 200ms var(--ease-enter), transform 260ms var(--ease-enter);
+}
+button:hover, .btn:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+button:active { transform: scale(0.98); }
+button.primary { background: var(--ink); color: var(--substrate); border-color: var(--ink); }
+button.primary:hover { background: color-mix(in srgb, var(--ink) 88%, var(--substrate)); }
+button.icon { width: 40px; padding: 0; display: inline-grid; place-items: center; border-color: transparent; }
+button:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.field { display: flex; align-items: center; min-height: 44px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--surface); padding: 0 1rem; }
+.field:focus-within { border-color: var(--brand); }
+.field input { flex: 1; font: inherit; color: var(--ink); background: transparent; border: 0; outline: 0; min-width: 0; }
+
+.card { background: var(--substrate); border: 1px solid var(--hairline); border-radius: var(--r-card); }
+.inset { border-radius: var(--r-inset); }
+.hairline { border-top: 1px solid var(--hairline); }
+
+svg.lucide { width: 1.15rem; height: 1.15rem; stroke-width: 1.5; flex: none; }
+
+.chip { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 999px; background: var(--brand-tint); color: var(--brand-deep); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 25%, transparent); }
+
+.verdict { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 999px; padding: 0.2rem 0.7rem 0.2rem 0.5rem; font-weight: 500; font-size: 0.8125rem; border: 1px solid var(--hairline); }
+.verdict.strong { color: var(--accent); background: var(--brand-tint); border-color: color-mix(in srgb, var(--brand) 25%, transparent); }
+.verdict.secondary { color: var(--ink-secondary); background: var(--surface); }
+.verdict.delegated { color: var(--warn-deep); background: var(--warn-tint); border-color: transparent; }
+.verdict.failed { color: var(--danger); background: var(--danger-tint); border-color: transparent; }
+.verdict.neutral { color: var(--ink-muted); background: var(--surface); }
+
+.skeleton { background: linear-gradient(90deg, var(--surface), var(--hairline), var(--surface)); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; border-radius: var(--r-inset); }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } * { transition: none !important; } }

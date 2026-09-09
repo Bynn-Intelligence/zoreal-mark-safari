@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.DS_Store
+*.tsbuildinfo
+.idea/
+.vscode/
+*.zip
+*.crx
+*.pem
+
+# Local only: private map and skill symlinks carry absolute paths
+CLAUDE.local.md
+.claude/skills/
+dev/screens/
+
+release/
+# Build output the Xcode project embeds; npm run build:safari makes it
+apple/ZOREAL Mark/Shared (Extension)/Resources/
+apple/**/xcuserdata/
+apple/**/build/
+CLAUDE.md

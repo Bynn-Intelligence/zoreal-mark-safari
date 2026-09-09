@@ -1,0 +1,89 @@
+# Releases.
+#
+# Every push to main that touches the code is a release: the patch version is
+# bumped in package.json (which the manifest reads), committed, tagged
+# v<version>, built, checked, and published as a GitHub release with the
+# shaped extension attached. Safari installs only what the App Store ships,
+# so the attachment is for reading and for building the app from source; the
+# App Store archive is made in Xcode with the team's certificates.
+#
+# Two other ways in: run the workflow by hand with a level of minor or major
+# for a bigger bump; or push a tag v<version> yourself, which skips the bump
+# and must match the manifest version.
+#
+# A push that only touches documentation or the store listing is not a
+# release. The bump commit is pushed with the workflow's own token, which does
+# not start workflows, so a release cannot trigger another.
+name: Release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths-ignore:
+      - '**.md'
+      - 'store/**'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+    inputs:
+      level:
+        description: Version bump
+        type: choice
+        default: patch
+        options: [patch, minor, major]
+
+concurrency: release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Fetch git dependencies over HTTPS
+        run: git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
+      - run: npm ci
+      # The lockfile is written on a Mac and carries only that platform's native
+      # binding for the bundler; npm does not add another platform's on its own
+      # (npm/cli#4828). The runner's binding is added here, at the locked
+      # bundler version.
+      - run: |
+          npm install --no-save --no-audit --no-fund \
+            "@rolldown/binding-linux-x64-gnu@$(node -p "JSON.parse(require('fs').readFileSync('node_modules/rolldown/package.json','utf8')).version")" \
+            "lightningcss-linux-x64-gnu@$(node -p "JSON.parse(require('fs').readFileSync('node_modules/lightningcss/package.json','utf8')).version")"
+      - name: Bump the version, commit and tag
+        # A branch push bumps the patch level; a run by hand bumps the level
+        # chosen; a tag push is already the version and bumps nothing.
+        if: "!startsWith(github.ref, 'refs/tags/') && !startsWith(github.event.head_commit.message, 'Release v')"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm version "${{ github.event_name == 'workflow_dispatch' && inputs.level || 'patch' }}" -m "Release v%s"
+          git push --follow-tags origin HEAD:main
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build:safari
+      - name: The tag names the manifest version
+        id: version
+        run: |
+          v=$(node -p "require('./dist/manifest.json').version")
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "tag=v$v" >> "$GITHUB_OUTPUT"
+      - run: npm run pack
+      - name: GitHub release with the shaped extension
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          files: release/*.zip
+          generate_release_notes: true
+          body: |
+            Safari installs this extension from the App Store only. The zip is the
+            extension as it ships inside the app, for reading; to run it from source,
+            follow the README's Install section with Xcode.
