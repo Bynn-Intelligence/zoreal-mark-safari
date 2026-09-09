@@ -6,6 +6,12 @@ Mac, iPhone and iPad. The first upload is made from Xcode; the steps are at the 
 
 ## App record (App Store Connect)
 
+Created 2026-09-09 under the company's team, App Store Connect app id `6810429958`. The
+name, subtitle, privacy policy URL, category, age rating and the English version text
+below were set through the App Store Connect API the same day; what remains in the
+form is pricing (free), the App Privacy answers, the review contact, the screenshots,
+and the builds.
+
 - **Name:** ZOREAL Mark
 - **Bundle id:** `com.zoreal.mark` (the extension is `com.zoreal.mark.Extension`)
 - **Primary language:** English (U.S.)
