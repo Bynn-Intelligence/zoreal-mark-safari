@@ -1,6 +1,6 @@
 {
   "name": "zoreal-mark-safari",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "ZOREAL Mark for Safari: verify that a real human, verified by ZOREAL, vouched for what you are reading, and sign what you post.",
   "license": "MIT",
