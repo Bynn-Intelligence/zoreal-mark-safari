@@ -61,9 +61,10 @@ trusted.
 
 The Safari build of the extension that runs in Chrome: the same source, the same
 verifier, with the manifest and the build changed where Safari differs, inside the Mac
-and iOS app that Safari extensions ship in. The Mac app builds and the extension loads
-in Safari on a Mac. Not yet: a run on an iPhone, the App Store listing, the production
-record service keys, and the verifier package on npm. This section is kept true.
+and iOS app that Safari extensions ship in. In Safari on a Mac every conformance case on
+the demo page renders the verdict it expects, the same counts Chrome and Firefox
+render. Not yet: a run on an iPhone, the App Store listing, the production record
+service keys, and the verifier package on npm. This section is kept true.
 
 ## What a Mark asserts
 
