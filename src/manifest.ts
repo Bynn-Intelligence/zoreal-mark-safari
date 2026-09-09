@@ -60,8 +60,12 @@ export default defineManifest((env) => ({
   ],
   content_security_policy: {
     // A release talks to the record service and nothing else. A development
-    // build (`npm run build:local`, `npm run dev`) may also reach a record
-    // service on this machine: the mock on 4820 and a local API on 3000.
-    extension_pages: `script-src 'self'; object-src 'self'; connect-src https://mark.zoreal.com https://api.zoreal.com${env.mode === 'production' ? '' : ' http://localhost:4820 http://localhost:3000'}; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'`,
+    // build (`npm run build:safari:local`) names no connect-src, so it can
+    // reach a record service on this machine at whatever port the options
+    // page says: Safari refuses a plain-http source even when the policy
+    // lists it (seen 2026-09-09 with http://localhost listed), so listing
+    // localhost, which works in Chrome and Firefox, does nothing here. The
+    // scripts stay 'self' either way; nothing remote ever runs.
+    extension_pages: `script-src 'self'; object-src 'self';${env.mode === 'production' ? ' connect-src https://mark.zoreal.com https://api.zoreal.com;' : ''} img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'`,
   },
 }));
