@@ -26,7 +26,7 @@
     "build:safari:local": "npm run build:local && node scripts/safari-dist.mjs"
   },
   "dependencies": {
-    "@zoreal/mark-verify": "github:Bynn-Intelligence/zoreal-mark-verify#41655e28e4f67b61cdcd966fdbcb82f6fff59e89",
+    "@zoreal/mark-verify": "^0.1.1",
     "qrcode": "^1.5.4"
   },
   "devDependencies": {
